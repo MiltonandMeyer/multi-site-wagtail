@@ -11,6 +11,7 @@ SECRET_KEY = '(i62*8!&b=!zm4w_+6#85kxm=%1f#8jq)o!h@dd5g1i+(8c19i'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+ALLOWED_HOSTS = ['law.localhost', 'ag.localhost', 'localhost', 'travel.localhost', 'sport.localhost']
 
 try:
     from .local import *

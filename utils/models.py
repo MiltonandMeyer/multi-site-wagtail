@@ -19,6 +19,8 @@ from modelcluster.models import ClusterableModel
 # an internal or external link. It also provides a custom property ('link') to simplify
 # using it in the template.
 
+#TO DO: Set 'default page settings to be default for everything
+
 class LinkFields(models.Model):
     link_external = models.URLField("External link", blank=True)
     link_page = models.ForeignKey(
@@ -89,21 +91,33 @@ class FooterLinksRelatedLink(Orderable, RelatedLink):
 
 @register_setting
 class SiteBranding(BaseSetting):
-    site_logo = models.ForeignKey(
+    BLUE = '5790D4'
+    GREEN = '56CF8C'
+    RUSTY = '925914'
+    GREY = '5A6978'
+    NONE = 'ffffff'
+    COLOUR_CHOICES = (
+    (BLUE, 'Blue'),
+    (GREEN, 'Green'),
+    (RUSTY, 'Rusty Red/Orange'),
+    (GREY, 'Grey'),
+    (NONE, 'None'),
+    )
+    banner_colour = models.CharField(
+        max_length=6,
+        choices=COLOUR_CHOICES,
+        default=NONE,
+        help_text="Pick a colour"
+    )
+    site_banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
     )
-    banner_colour = models.CharField(
-        max_length=6,
-        null=True,
-        blank=True,
-        help_text="Fill in a hex colour value"
-    )
 
     panels = [
-        ImageChooserPanel('site_logo'),
+        ImageChooserPanel('site_banner_image'),
         FieldPanel('banner_colour'),
     ]

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
 
     'wagtail.contrib.settings',
+    'wagtail.contrib.wagtailstyleguide',
 
     'modelcluster',
     'taggit',
